@@ -12,6 +12,7 @@ public class UserInfo implements Serializable {
     private String country;
     private String avatarUrl;
     private String unionId;
+    private String language;
     private WaterMark watermark;
 
     public String getOpenId() {
@@ -78,32 +79,19 @@ public class UserInfo implements Serializable {
         this.unionId = unionId;
     }
 
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
     public WaterMark getWatermark() {
         return watermark;
     }
 
     public void setWatermark(WaterMark watermark) {
         this.watermark = watermark;
-    }
-}
-
-class WaterMark {
-    private String appid;
-    private String timestamp;
-
-    public String getAppid() {
-        return appid;
-    }
-
-    public void setAppid(String appid) {
-        this.appid = appid;
-    }
-
-    public String getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
     }
 }
