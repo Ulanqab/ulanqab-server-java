@@ -11,15 +11,21 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/feed")
+@RequestMapping("/api")
 public class FeedController {
     @Autowired
     private FeedMapper feedMapper;
 
-    @RequestMapping(path = "list", method = RequestMethod.GET)
+    @RequestMapping(path = "feed/list", method = RequestMethod.GET)
     public UlanqabResponse<ListData<Feed>> feedList(@RequestParam(value = "page", defaultValue = "1") int page,
                                                     @RequestParam(value = "cursor", defaultValue = "-1") Long cursor) {
         List<Feed> list = feedMapper.findAll();
+        return new UlanqabResponse<>(new ListData<>(false, list));
+    }
+
+    @RequestMapping(path = "category/list", method = RequestMethod.GET)
+    public UlanqabResponse<ListData<Category>> feedList() {
+        List<Category> list = feedMapper.findCategories();
         return new UlanqabResponse<>(new ListData<>(false, list));
     }
 }

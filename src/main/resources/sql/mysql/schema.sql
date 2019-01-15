@@ -1,5 +1,7 @@
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS user_detail;
+DROP TABLE IF EXISTS feed;
+DROP TABLE IF EXISTS category;
 
 CREATE TABLE user (
   uid       BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -13,7 +15,7 @@ CREATE TABLE user (
 
 
 CREATE TABLE user_detail (
-  uid        IDENTITY,
+  uid        BIGINT,
   mobile     VARCHAR(255),
   username   VARCHAR(255) NOT NULL,
   avatar     VARCHAR(255),
@@ -39,11 +41,29 @@ CREATE TABLE user_detail (
   FOREIGN KEY (uid) REFERENCES user (uid),
 );
 
+
+CREATE TABLE category (
+  id        INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  name      VARCHAR(255) NOT NULL,
+  code      VARCHAR(255) NOT NULL,
+  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) AUTO_INCREMENT = 0;
+
 CREATE TABLE feed (
-  id        BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  nickName  VARCHAR(255) NOT NULL,
-  avatar    VARCHAR(255),
-  title     INT DEFAULT 1,
-  createAt  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  publishAt TIMESTAMP
+  id          BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  uid         BIGINT NOT NULL,
+--   FOREIGN KEY (uid) REFERENCES user(uid),
+  categoryId  INTEGER NOT NULL,
+--   FOREIGN KEY (categoryId) REFERENCES category(id),
+  title       VARCHAR(255),
+  images      VARCHAR(255),
+  video       VARCHAR(255),
+  content     VARCHAR(255) NOT NULL,
+  likeCount   INTEGER   DEFAULT 0,
+  viewCount   INTEGER   DEFAULT 0,
+  createAt    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updatedAt   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  publishAt   TIMESTAMP,
+  status      INTEGER   DEFAULT 0
+  COMMENT '0 created, 1 published 2  expired 3 deleted'
 );
