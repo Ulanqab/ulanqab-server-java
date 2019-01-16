@@ -1,8 +1,9 @@
 package com.ulanqab.daily.api.feed;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Category {
+public class Category implements Serializable {
     private Long id;
     private String name;
     private String code;

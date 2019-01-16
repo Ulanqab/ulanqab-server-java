@@ -1,8 +1,9 @@
 package com.ulanqab.daily.api.feed;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Feed {
+public class Feed implements Serializable {
     private Long id;
     private Long uid;
     private String title;

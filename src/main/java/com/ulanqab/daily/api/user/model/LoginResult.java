@@ -1,13 +1,10 @@
 package com.ulanqab.daily.api.user.model;
 
-import com.ulanqab.daily.api.user.model.User;
-
 import java.io.Serializable;
 
 public class LoginResult implements Serializable {
     private String token;
     private User user;
-
 
     public LoginResult(String token, User user) {
         this.token = token;
