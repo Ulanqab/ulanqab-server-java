@@ -36,13 +36,19 @@ public class UserController {
         try {
             String userInfoStr = AesCbcUtil.decrypt(commonBean.getEncryptedData(), session.getSession_key(), commonBean.getIv(), "UTF-8");
             UserInfo userInfo = JsonUtils.jsonToObject(userInfoStr, UserInfo.class);
-            String token = Jwt.createToken(expiredTime, 1);
-            User user = new User(userInfo.getNickName()
-                    , userInfo.getAvatarUrl()
-                    , new Timestamp(loginTime)
-                    , new Timestamp(expiredTime));
-            userMapper.insertUser(user);
-            return new UlanqabResponse<>(new LoginResult(token, user));
+
+            User userResult = userMapper.findByThirdId(userInfo.getOpenId());
+            if (userResult == null) {
+                User user = new User(userInfo.getOpenId()
+                        ,userInfo.getNickName()
+                        , userInfo.getAvatarUrl()
+                        , new Timestamp(loginTime)
+                        , new Timestamp(expiredTime));
+                userMapper.insertUser(user);
+                userResult = userMapper.findByThirdId(userInfo.getOpenId());
+            }
+            String token = Jwt.createToken(userResult);
+            return new UlanqabResponse<>(new LoginResult(token, userResult));
         } catch (Exception e) {
             e.printStackTrace();
         }

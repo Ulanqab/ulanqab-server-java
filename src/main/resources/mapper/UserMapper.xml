@@ -9,6 +9,7 @@
         <set>
             <if test="nickName != null">nickName=#{nickName},</if>
             <if test="avatar != null">avatar=#{avatar},</if>
+            <if test="role != null">role=#{role},</if>
             <if test="loginAt != null">loginAt=#{loginAt},</if>
         </set>
         where uid=#{uid}

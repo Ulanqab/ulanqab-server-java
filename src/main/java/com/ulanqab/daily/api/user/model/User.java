@@ -6,21 +6,28 @@ import java.sql.Timestamp;
 public class User implements Serializable {
     private Long uid;
     private String nickName;
+    private String thirdId;
     private String avatar;
     private Integer role;
     private Timestamp loginAt;
     private Timestamp expiresAt;
     private Boolean isLocked = false;
 
-    public User(String nickName, String avatar, Timestamp loginAt, Timestamp expiresAt) {
+    public User() {
+    }
+
+    public User(String thirdId, String nickName, String avatar, Timestamp loginAt, Timestamp expiresAt) {
+        this.thirdId = thirdId;
         this.nickName = nickName;
         this.avatar = avatar;
         this.loginAt = loginAt;
         this.expiresAt = expiresAt;
     }
 
-    public User(Long uid, String nickName, String avatar, Integer role, Timestamp loginAt, Timestamp expiresAt, Boolean isLocked) {
+
+    public User(Long uid, String thirdId, String nickName, String avatar, Integer role, Timestamp loginAt, Timestamp expiresAt, Boolean isLocked) {
         this.uid = uid;
+        this.thirdId = thirdId;
         this.nickName = nickName;
         this.avatar = avatar;
         this.role = role;
@@ -37,11 +44,19 @@ public class User implements Serializable {
         this.uid = uid;
     }
 
-    public String getnickName() {
+    public String getThirdId() {
+        return thirdId;
+    }
+
+    public void setThirdId(String thirdId) {
+        this.thirdId = thirdId;
+    }
+
+    public String getNickName() {
         return nickName;
     }
 
-    public void setnickName(String nickName) {
+    public void setNickName(String nickName) {
         this.nickName = nickName;
     }
 
@@ -51,6 +66,14 @@ public class User implements Serializable {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
     }
 
     public Timestamp getLoginAt() {

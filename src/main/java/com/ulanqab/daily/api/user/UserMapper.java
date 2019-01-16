@@ -7,18 +7,21 @@ import java.sql.Timestamp;
 
 @Mapper
 public interface UserMapper {
+    @Select("SELECT * FROM user WHERE thirdId =#{thirdId}")
+    User findByThirdId(@Param("thirdId") String thirdId);
+
     @Select("SELECT * FROM user WHERE uid =#{uid}")
     User findByUid(@Param("uid") String uid);
 
-    @Insert("INSERT into user(nickName, avatar, loginAt, expiresAt, isLocked)" +
-            " VALUES(#{nickName}, #{avatar}, #{loginAt}, #{expiresAt}, #{isLocked})")
+    @Insert("INSERT into user(thirdId, nickName, avatar, loginAt, expiresAt, isLocked)" +
+            " VALUES(#{thirdId}, #{nickName}, #{avatar}, #{loginAt}, #{expiresAt}, #{isLocked})")
     int insertUser(User token);
 
     int updateUserIfNecessary(@Param("uid") Long uid,
-                              @Param("password") String password,
-                              @Param("loginAt") Timestamp loginAt,
-                              @Param("mobile") String mobile,
-                              @Param("appId") int appId);
+                              @Param("nickName") String nickName,
+                              @Param("avatar") String avatar,
+                              @Param("role") int role,
+                              @Param("loginAt") Timestamp loginAt);
 
     @Delete("DELETE FROM user WHERE uid =#{uid}")
     int deleteByUid(Long uid);

@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS category;
 
 CREATE TABLE user (
   uid       BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  thirdId   VARCHAR(255) NOT NULL,
   nickName  VARCHAR(255) NOT NULL,
   avatar    VARCHAR(255),
   role      INT DEFAULT 1 COMMENT '1 user 2 admin 3 super admin',

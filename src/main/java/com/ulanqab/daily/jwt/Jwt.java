@@ -5,7 +5,10 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.ulanqab.daily.api.user.model.User;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +16,7 @@ public class Jwt {
 
     private static final byte[] SECRET = "3d990d2276917dfac04467df1fdajkdfaff26d".getBytes();
 
-    public static String createToken(Long expireTime, Integer role) {
+    public static String createToken(User user) {
         String token = "";
         try {
             Map header = new HashMap();
@@ -22,12 +25,17 @@ public class Jwt {
             Algorithm algorithmHS = Algorithm.HMAC256(SECRET);
             token = JWT.create()
                     .withHeader(header)
-                    .withClaim("exp", expireTime)
-                    .withClaim("role", role)
+//                    .withClaim("nickName", user.getNickName())
+//                    .withClaim("avatar", user.getAvatar())
+                    .withClaim("thirdId", user.getThirdId())
+                    .withClaim("exp", user.getExpiresAt())
+//                    .withClaim("loginAt", user.getLoginAt())
+                    .withClaim("role", user.getRole())
                     .withIssuer("auth0")
+                    .withExpiresAt(user.getExpiresAt())
                     .sign(algorithmHS);
         } catch (JWTCreationException exception) {
-            //
+            exception.printStackTrace();
         }
         return token;
     }
