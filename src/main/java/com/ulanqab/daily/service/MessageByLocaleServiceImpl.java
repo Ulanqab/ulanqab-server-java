@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.Locale;
 
 @Component
-public class MessageByLocalServiceImpl implements MessageByLocalService{
+public class MessageByLocaleServiceImpl implements MessageByLocaleService {
 
     @Autowired
     private MessageSource messageSource;
