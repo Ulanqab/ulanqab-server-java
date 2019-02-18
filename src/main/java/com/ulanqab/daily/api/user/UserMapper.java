@@ -4,9 +4,14 @@ import com.ulanqab.daily.api.user.model.User;
 import org.apache.ibatis.annotations.*;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Mapper
 public interface UserMapper {
+
+    @Select("SELECT * FROM user")
+    List<User> findAll();
+
     @Select("SELECT * FROM user WHERE thirdId =#{thirdId}")
     User findByThirdId(@Param("thirdId") String thirdId);
 

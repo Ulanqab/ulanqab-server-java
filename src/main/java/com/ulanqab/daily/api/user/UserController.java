@@ -5,6 +5,7 @@ import com.ulanqab.daily.api.user.model.*;
 import com.ulanqab.daily.jwt.Jwt;
 import com.ulanqab.daily.utils.AesCbcUtil;
 import com.ulanqab.daily.utils.JsonUtils;
+import com.ulanqab.daily.wrapper.ListData;
 import com.ulanqab.daily.wrapper.UlanqabResponse;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
@@ -54,6 +56,12 @@ public class UserController {
         }
 
         return new UlanqabResponse<>();
+    }
+
+    @RequestMapping(value = "list", method = RequestMethod.GET)
+    public UlanqabResponse<ListData<User>> list() {
+        List<User> list = userMapper.findAll();
+        return new UlanqabResponse<>(new ListData<>(false, list));
     }
 
     private Session getSession(String code) throws IOException {
