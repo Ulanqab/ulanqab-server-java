@@ -11,6 +11,7 @@ public class Feed implements Serializable {
     private String avatar;
     private Timestamp createAt;
     private Timestamp publishAt;
+    private Integer status;
 
     public Long getId() {
         return id;
@@ -66,5 +67,13 @@ public class Feed implements Serializable {
 
     public void setPublishAt(Timestamp publishAt) {
         this.publishAt = publishAt;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

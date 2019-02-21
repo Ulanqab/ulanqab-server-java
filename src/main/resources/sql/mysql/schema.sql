@@ -56,6 +56,8 @@ CREATE TABLE feed (
 --   FOREIGN KEY (uid) REFERENCES user(uid),
   categoryId  INTEGER NOT NULL,
 --   FOREIGN KEY (categoryId) REFERENCES category(id),
+  nickName    VARCHAR(255) NOT NULL,
+  avatar      VARCHAR(255),
   title       VARCHAR(255),
   images      VARCHAR(255),
   video       VARCHAR(255),

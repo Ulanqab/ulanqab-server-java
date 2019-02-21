@@ -15,8 +15,7 @@ public interface FeedMapper {
     @Select("SELECT * FROM feed")
     List<Feed> findAll();
 
-    List<Feed> findByPage(@Param("category") Integer category,
-                          @Param("offset") Integer offset,
-                          @Param("count") Integer count,
-                          @Param("cursor") Long cursor);
+    List<Feed> findByPage(@Param("category") int category,
+                          @Param("count") int count,
+                          @Param("offset") int offset);
 }

@@ -6,19 +6,8 @@
 
     <select id="findByPage" resultType="Feed">
         SELECT * FROM feed
-        <where>
-            <if test="category != 1">
-                category = #{category}
-            </if>
-            <if test="cursor > 0">
-                id &lt; #{cursor}
-            </if>
-        </where>
-        ORDER BY id DESC
-        LIMIT
-        <if test="cursor &lt; 0">
-            #{offset},
-        </if>
-        #{count}
+        WHERE category = #{category}
+        LiMIT #{count}
+        OFFSET #{offset}
     </select>
 </mapper>
