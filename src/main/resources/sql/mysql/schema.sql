@@ -67,6 +67,8 @@ CREATE TABLE feed (
   createAt    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updatedAt   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   publishAt   TIMESTAMP,
+  cellphone   BIGINT,
+  isTop       INTEGER   DEFAULT 0 COMMENT '0 false, 1 true',
   status      INTEGER   DEFAULT 0
   COMMENT '0 created, 1 published 2  expired 3 deleted'
 );

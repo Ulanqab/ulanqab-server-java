@@ -6,12 +6,16 @@ import java.sql.Timestamp;
 public class Feed implements Serializable {
     private Long id;
     private Long uid;
+    private Integer categoryId;
     private String title;
+    private String content;
     private String nickName;
     private String avatar;
+    private Long cellphone;
     private Timestamp createAt;
     private Timestamp publishAt;
     private Integer status;
+    private Integer isTop;
 
     public Long getId() {
         return id;
@@ -29,12 +33,28 @@ public class Feed implements Serializable {
         this.uid = uid;
     }
 
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
+
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getNickName() {
@@ -51,6 +71,14 @@ public class Feed implements Serializable {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public Long getCellphone() {
+        return cellphone;
+    }
+
+    public void setCellphone(Long cellphone) {
+        this.cellphone = cellphone;
     }
 
     public Timestamp getCreateAt() {
@@ -75,5 +103,13 @@ public class Feed implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getIsTop() {
+        return isTop;
+    }
+
+    public void setIsTop(Integer top) {
+        isTop = top;
     }
 }

@@ -1,8 +1,6 @@
 package com.ulanqab.daily.api.feed;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -18,4 +16,13 @@ public interface FeedMapper {
     List<Feed> findByPage(@Param("category") int category,
                           @Param("count") int count,
                           @Param("offset") int offset);
+    @Insert("INSERT INTO feed(uid,nickName,isTop,cellphone,avatar,categoryId,title,content) " +
+            "VALUES (#{uid},#{nickName},#{isTop},#{cellphone},#{avatar},#{categoryId},#{title},#{content})")
+    int insertFeed(Feed feed);
+
+
+    @Update("UPDATE feed(id,uid,nickName,isTop,cellphone,avatar,categoryId,title,content) " +
+            "VALUES (#{id},#{uid},#{nickName},#{isTop},#{cellphone},#{avatar},#{categoryId},#{title},#{content})")
+
+    int updateFeed(Long id, Feed feed);
 }

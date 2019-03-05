@@ -6,7 +6,7 @@
 
     <select id="findByPage" resultType="Feed">
         SELECT * FROM feed
-        WHERE category = #{category}
+        WHERE categoryId = #{category}
         LiMIT #{count}
         OFFSET #{offset}
     </select>
