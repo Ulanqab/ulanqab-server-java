@@ -25,14 +25,6 @@ public class FeedController {
     @Autowired
     private FeedMapper feedMapper;
 
-    @RequestMapping(path = "feed/list", method = RequestMethod.GET)
-    public UlanqabResponse<ListData<Feed>> feedList(@RequestParam(value = "category", defaultValue = "1") int category,
-                                                    @RequestParam(value = "page", defaultValue = "1") int page,
-                                                    @RequestParam(value = "count", defaultValue = "1") int count) {
-        List<Feed> list = feedMapper.findByPage(category, count, count*(page-1));
-        return new UlanqabResponse<>(new ListData<>(false, list));
-    }
-
     @RequestMapping(path = "category/list", method = RequestMethod.GET)
     public UlanqabResponse<ListData<Category>> feedList(/**@RequestHeader(value = "Authorization") String token**/) throws TokenInvalidException {
 //        String tokenStr = token.replace("Bearer ", "");
@@ -48,23 +40,40 @@ public class FeedController {
         return new UlanqabResponse<>(new ListData<>(false, list));
     }
 
+    @RequestMapping(path = "feed/list", method = RequestMethod.GET)
+    public UlanqabResponse<ListData<Feed>> feedList(@RequestParam(value = "category", defaultValue = "1") int category,
+                                                    @RequestParam(value = "page", defaultValue = "1") int page,
+                                                    @RequestParam(value = "count", defaultValue = "10") int count) {
+        List<Feed> list = feedMapper.findByPage(category, count, count * (page - 1));
+        return new UlanqabResponse<>(new ListData<>(false, list));
+    }
+
+    @RequestMapping(path = "feed/list/{id}", method = RequestMethod.GET)
+    public UlanqabResponse<Feed> feedInfo(@PathVariable(value = "id") int id) {
+        Feed feed = feedMapper.findFeedById(id);
+        return new UlanqabResponse<>(feed);
+    }
+
     @RequestMapping(path = "feed/create", method = RequestMethod.POST)
     public UlanqabResponse<Feed> createFeed(@RequestBody String params) {
         Feed feed = JsonUtils.jsonToObject(params, Feed.class);
-        int result = feedMapper.insertFeed(feed);
+        int result = feedMapper.createFeed(feed);
         return new UlanqabResponse<>(result);
     }
 
     @RequestMapping(path = "feed/update", method = RequestMethod.POST)
-    public UlanqabResponse<Feed> updateFeed(@RequestParam(value = "id") Long id,
-                                            @RequestBody String params) {
+    public UlanqabResponse<Feed> updateFeed(@RequestBody String params) {
         Feed feed = JsonUtils.jsonToObject(params, Feed.class);
-        int result = feedMapper.updateFeed(id, feed);
-        return new UlanqabResponse<>();
+        int result = feedMapper.updateFeed(feed);
+        if (result == 1) {
+            int id = Long.compare(feed.getId(), 0);
+            feed = feedMapper.findFeedById(id);
+        }
+        return new UlanqabResponse<>(feed);
     }
 
-    @RequestMapping(path = "feed/like", method = RequestMethod.POST)
-    public UlanqabResponse<Feed> updateLike(@RequestBody String params) {
+    @RequestMapping(path = "feed/{id}/like", method = RequestMethod.POST)
+    public UlanqabResponse<Feed> updateLike(@PathVariable int id) {
         return new UlanqabResponse<>();
     }
 }

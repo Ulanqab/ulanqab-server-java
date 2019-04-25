@@ -10,4 +10,22 @@
         LiMIT #{count}
         OFFSET #{offset}
     </select>
+
+    <select id="findFeedById" resultType="Feed">
+        SELECT * FROM feed
+        WHERE id = #{id}
+    </select>
+    
+    <insert id="createFeed">
+        INSERT INTO feed(uid,nickName,isTop,cellphone,avatar,categoryId,title,content)
+        VALUES(#{uid},#{nickName},#{isTop},#{cellphone},#{avatar},#{categoryId},#{title},#{content})
+    </insert>
+
+    <update id="updateFeed">
+        UPDATE feed SET
+          title = #{title},
+          content = #{content},
+          cellphone = #{cellphone}
+        WHERE id = #{id}
+    </update>
 </mapper>
