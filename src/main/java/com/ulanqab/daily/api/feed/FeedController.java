@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://ulanqab.fun:8080")
+@CrossOrigin(origins = "https://ulanqab.fun:8080")
 @RequestMapping("/api")
 public class FeedController {
     @Autowired
@@ -41,7 +41,6 @@ public class FeedController {
         return new UlanqabResponse<>(new ListData<>(false, list));
     }
 
-    @CrossOrigin(origins = "http://ulanqab.fun:8080")
     @RequestMapping(path = "/feed/list", method = RequestMethod.GET)
     public UlanqabResponse<ListData<Feed>> feedList(@RequestParam(value = "category", defaultValue = "1") int category,
                                                     @RequestParam(value = "page", defaultValue = "1") int page,
@@ -72,6 +71,13 @@ public class FeedController {
             feed = feedMapper.findFeedById(id);
         }
         return new UlanqabResponse<>(feed);
+    }
+
+    @RequestMapping(path = "/feed/delete", method = RequestMethod.POST)
+    public UlanqabResponse<Feed> deleteFeed(@RequestBody String params) {
+        Feed feed = JsonUtils.jsonToObject(params, Feed.class);
+        int result = feedMapper.deleteFeed(feed);
+        return new UlanqabResponse<>();
     }
 
     @RequestMapping(path = "/feed/{id}/like", method = RequestMethod.POST)

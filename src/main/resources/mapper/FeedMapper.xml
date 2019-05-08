@@ -28,4 +28,8 @@
           cellphone = #{cellphone}
         WHERE id = #{id}
     </update>
+    
+    <delete id="deleteFeed">
+      DELETE FROM feed WHERE id = #{id}
+    </delete>
 </mapper>

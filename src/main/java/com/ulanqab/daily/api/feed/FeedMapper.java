@@ -16,9 +16,9 @@ public interface FeedMapper {
 
     Feed findFeedById(@Param("id") int id);
 
-//    @Insert("INSERT INTO feed(uid,nickName,isTop,cellphone,avatar,categoryId,title,content) " +
-//            "VALUES (#{uid},#{nickName},#{isTop},#{cellphone},#{avatar},#{categoryId},#{title},#{content})")
     int createFeed(Feed feed);
 
     int updateFeed(Feed feed);
+
+    int deleteFeed(Feed feed);
 }
