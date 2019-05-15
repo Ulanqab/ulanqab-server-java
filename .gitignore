@@ -1,0 +1,12 @@
+/local.properties
+/build/
+/.out/
+.#*
+*#
+*~
+.classpath
+.gradle
+*.iml
+.idea
+src/main/resources/application-dev.properties
+src/main/resources/ulanqab.jks
