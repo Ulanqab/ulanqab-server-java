@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "https://ulanqab.fun:8080")
+@CrossOrigin(origins = "http://localhost:8080")
 @RequestMapping("/api")
 public class FeedController {
     @Autowired

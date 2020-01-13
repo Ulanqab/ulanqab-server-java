@@ -34,12 +34,11 @@ CREATE TABLE user_detail (
   COMMENT '1 user 2 admin 3 super admin',
 
   registerAt TIMESTAMP    DEFAULT CURRENT_TIMESTAMP
-  COMMENT 'use first insert timestamp',
+  COMMENT 'user first insert timestamp',
 
-  updatedAt  TIMESTAMP AS CURRENT_TIMESTAMP
+  updatedAt  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   COMMENT 'update as current time each time row updated',
-
-  FOREIGN KEY (uid) REFERENCES user (uid),
+  FOREIGN KEY (uid) REFERENCES user (uid)
 );
 
 
